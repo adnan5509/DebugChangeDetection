@@ -12,17 +12,21 @@ import { InfoMessageComponent } from '../info-message/info-message.component';
 })
 export class CounterComponent implements OnInit {
 
+  count = signal(0);
+
   constructor(private zone: NgZone) {
   }
 
   ngOnInit() {
-    this.zone.runOutsideAngular(() => {
-      setTimeout(() => {
-        console.log('Timer Expired without any change detection.');
-      }, 5000);
-    })
+    setTimeout(() => {
+      this.count.set(0);
+      console.log('Counter Reset');
+    }, 4000);
+
+    setTimeout(() => {
+      console.log('Timer Expired');
+    }, 5000);
   }
-  count = signal(0);
 
   get debugOutput() {
     console.log('[Counter] "debugOutput" binding re-evaluated.');
